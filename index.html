@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -7,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Record time or set Alarm</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="">
@@ -16,23 +15,22 @@ and open the template in the editor.
     </head>
     <body>
         <h1 id="time">00:00:00</h1>
+        <button id="clear">clear</button>
         <div id="mainPanel">
-            <div id="leftPanel">Left</div>
-            <div id="rightPanel">Right</div>
-        
-        
-        
-        
-        </div>
-            <button id="start">start</button>
-            <button id="stop">stop</button>
-            <button id="clear">clear</button>
-            <button id="countdown" onClick="">Count Down</button>
-            <p> Counting down</p>
+            <div id="leftPanel" style="text-align:center">Timer (Count Up)
+                <br>
+                <button id="start">start</button>
+                <button id="stop">stop</button>
+            </div>
+            <div id="rightPanel">Stopwatch (Count Down)
+                
             <p>Hours:<input type="text" id="hours" ></p>
             <p>Minutes:<input type="text" id="minutes"></p>
             <p>Seconds:<input type="text" id="seconds"></p>
-            <button id="countdown" onClick="setTime()">set</button>
+                <button id="countdown" onClick="setTime()">set</button>
+                <button id="countdown" onClick="">Count Down</button>
+            </div>
+        </div>
             <script src="functions.js"></script>
     </body>
 </html>
