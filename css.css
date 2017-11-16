@@ -17,27 +17,35 @@ h2{
     float:left;
 }
 #time{
+    margin-top:50px;
     text-align:center;
     font-size:1500%;
     margin-bottom:0px;
 }
 #mainPanel{
-    background-color:greenyellow;
     width:900px;
-    height:400px;
+    height:200px;
     margin:auto;
 }
 
 #leftPanel{
+    text-align:center;
+    border-radius:15px;
     float:left;
     width:450px;
-    height:400px;
+    height:200px;
     background-color:greenyellow;
     
 }
 #rightPanel{
+    text-align:center;
+    border-radius:15px;
     float:left;
     width:450px;
-    height:400px;
+    height:200px;
     background-color:yellowgreen;
+}
+#clear{
+    margin:auto;
+    display:block;
 }
