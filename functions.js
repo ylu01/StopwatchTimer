@@ -59,8 +59,8 @@ function add() {
 
 function minus() {
     seconds--;
-    if (seconds === -1) {
-        if(hours !== 0 && minutes !== 0){
+    if (seconds < 0) {
+        if(hours >= 0 && minutes !== 0){
             seconds = 59;
             minutes--;
             if(minutes === -1){
@@ -76,6 +76,7 @@ function minus() {
                 hours--;
             }
         }
+        
         
     }
     var shownTime;
@@ -130,7 +131,7 @@ function timer() {
 /* Start button */
 document.getElementById("stop").disabled = true;
 start.onclick = timer;
-countDown.onclick=timerMinus;
+//countDown.onclick=timerMinus;
 
 
 
@@ -152,7 +153,7 @@ clear.onclick = function() {
 
 function setTime(){
     var cdTime;
-    
+    alert("wtf");
     if((document.getElementById("hours").value).toString().length === 1){
         hours = "0" + document.getElementById("hours").value;
     }
