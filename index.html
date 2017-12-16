@@ -23,12 +23,45 @@ and open the template in the editor.
                 <button id="stop">stop</button>
             </div>
             <div id="rightPanel">Stopwatch (Count Down)
+                <p id="timeText">00:00:00</p>
+                <div id="selectBox" class="selectBoxWrap">
+                    
+                    
+                    <div id="hour" class="selectBox dropdown">
+                        <button class="dropButton">select hour</button>
+                            <div id="hourSelect" class="dropdown-content">
+                                <div id="hourSelectWrapper" class="wrapper">
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div id="minute" class="selectBox dropdown">
+                        <button class="dropButton">select minute</button>
+                            <div id="minuteSelect" class="dropdown-content">
+                                <div id="minutesSelectWrapper" class="wrapper">
+                                </div>
+                            </div>
+                    </div>
+                    
+                    <div id="second" class="selectBox dropdown">
+                        <button class="dropButton">select minute</button>
+                            <div id="secondSelect" class="dropdown-content">
+                                <div id="secondsSelectWrapper" class="wrapper">
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <button id="countdownSet" onClick="setTime()">set</button>
+                <button id="countdown" onClick="timerMinus()">Count Down</button>
+                <button id="countdownStop" onClick="stop()"> Stop </button>
                 
-            <p>Hours:<input type="text" id="hours" ></p>
-            <p>Minutes:<input type="text" id="minutes"></p>
-            <p>Seconds:<input type="text" id="seconds"></p>
+                <!--
+                <p>Hours:<input type="text" id="hours" ></p>
+                <p>Minutes:<input type="text" id="minutes"></p>
+                <p>Seconds:<input type="text" id="seconds"></p>
                 <button id="countdown" onClick="setTime()">set</button>
                 <button id="countdown" onClick="timerMinus()">Count Down</button>
+                -->
             </div>
         </div>
             <script src="functions.js"></script>
