@@ -6,11 +6,136 @@
 
 var h1 = document.getElementsByTagName('h1')[0],
     start = document.getElementById('start'),
-    stop = document.getElementById('stop'),
+    countdownStop = document.getElementById('countdownStop'),
     clear = document.getElementById('clear'),
+    countdown = document.getElementById("countdown"),
     seconds = 0, minutes = 0, hours = 0,
     t, tm;
     var countDown = document.getElementById("countdown");
+
+function setDropdownHours(x){
+    var hourNode = document.createElement("a");
+    hourNode.setAttribute("href", "#");
+    hourNode.setAttribute("id","h"+ x);
+    hourNode.setAttribute("onclick", "setTimeText('h',"+x + ")");
+    var text = document.createTextNode(x);
+    hourNode.appendChild(text);
+    document.getElementById("hourSelectWrapper").appendChild(hourNode);
+}
+function setDropdownMinutes(x){
+    var hourNode = document.createElement("a");
+    hourNode.setAttribute("href", "#");
+    hourNode.setAttribute("id","m"+ x);
+    hourNode.setAttribute("onclick", "setTimeText('m',"+x + ")");
+    var text = document.createTextNode(x);
+    hourNode.appendChild(text);
+    document.getElementById("minutesSelectWrapper").appendChild(hourNode);
+}
+function setDropdownSeconds(x){
+    var hourNode = document.createElement("a");
+    hourNode.setAttribute("href", "#");
+    hourNode.setAttribute("id","s"+ x);
+    hourNode.setAttribute("onclick", "setTimeText('s',"+x + ")");
+    var text = document.createTextNode(x);
+    hourNode.appendChild(text);
+    document.getElementById("secondsSelectWrapper").appendChild(hourNode);
+}
+
+
+function set(value){
+    if(value === "h"){
+        for(var count = 0; count <= 60; count++){
+        setDropdownHours(count);
+    }
+        
+    }
+    else if(value === "m"){
+        for(var count1 = 0; count1 <= 60; count1++){
+        setDropdownMinutes(count1);
+    }
+    }
+    else if(value === "s"){
+        for(var count2 = 0; count2 <= 60; count2++){
+        setDropdownSeconds(count2);
+    }
+    }
+    
+}
+set("h");
+set("m");
+set("s");
+
+
+function setTimeText(timeUnit, value){ //pass in h,m or s
+    //document.getElementbyId("timeText").innerHTML
+    var originalText = document.getElementById("timeText").innerHTML;//should be "00:00:00"
+    var tempValue = value.toString();
+    if(timeUnit === "h"){
+        
+        if(tempValue.length === 1){
+            tempValue = "0" + value;
+            originalText = originalText.substr(2);
+            originalText = tempValue + originalText;
+            
+            document.getElementById("timeText").innerHTML = originalText;
+            hours = "0" + value;
+        }
+        else if(tempValue.length === 2){
+            originalText = originalText.substr(2);
+            originalText = tempValue + originalText;
+            document.getElementById("timeText").innerHTML = originalText;
+            hours = value;
+            
+        }
+        
+    }
+    
+    else if(timeUnit === "m"){
+        var tempSeconds = originalText.substr(6,8);
+        var tempHours = originalText.substr(0,2);
+        if(tempValue.length === 1){
+            tempValue = "0" + value;
+            originalText = tempHours +":" +  tempValue + ":" + tempSeconds;
+            
+            document.getElementById("timeText").innerHTML = originalText;
+            minutes = "0" + value;
+        }
+        else if(tempValue.length === 2){
+            originalText = tempHours +":" +  tempValue + ":" + tempSeconds;
+            document.getElementById("timeText").innerHTML = originalText;
+            minutes = value;
+        }
+        
+    }
+    
+    else if(timeUnit === "s"){
+        var tempTime = originalText.substr(0,6);
+        if(tempValue.length === 1){
+            tempValue = "0" + value;
+            originalText = tempTime + tempValue;
+            
+            document.getElementById("timeText").innerHTML = originalText;
+            seconds = "0" + value;
+        }
+        else if(tempValue.length === 2){
+            originalText = tempTime + tempValue;
+            document.getElementById("timeText").innerHTML = originalText;
+            seconds = value;
+        }
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function add() {
     seconds++;
@@ -114,11 +239,18 @@ function minus() {
     timerMinus();
     }
     function timerMinus() {
-        //alert(seconds);
-    tm = setTimeout(minus, 1000);
-    document.getElementById("countdown").disabled = true;
-    document.getElementById("stop").disabled = false;
-    document.getElementById("start").disabled = true;
+        if(document.getElementById("time").innerHTML === "00:00:00"){
+            alert("please set a time first.");
+        }
+        else{
+            document.getElementById("countdown").disabled = true;
+            document.getElementById("countdownStop").disabled=false;
+            tm = setTimeout(minus, 1000);
+        }
+        
+    //document.getElementById("countdown").disabled = true;
+    //document.getElementById("stop").disabled = false;
+    //document.getElementById("start").disabled = true;
 }
     
 function timer() {
@@ -137,12 +269,13 @@ start.onclick = timer;
 
 
 /* Stop button */
-stop.onclick = function(){
+countdownStop.onclick = function(){
     clearTimeout(t);
     clearTimeout(tm);
     document.getElementById("stop").disabled = true;
     document.getElementById("start").disabled = false;
     document.getElementById("countdown").disabled = false;
+    document.getElementById("countdownStop").disabled = true;
 };
 
 /* Clear button */
@@ -152,40 +285,11 @@ clear.onclick = function() {
 };
 
 function setTime(){
-    var cdTime;
-    alert("wtf");
-    if((document.getElementById("hours").value).toString().length === 1){
-        hours = "0" + document.getElementById("hours").value;
-    }
-    else if((document.getElementById("hours").value).toString().length === 0){
-        hours = "00";
+    if(document.getElementById("timeText").innerHTML === "00:00:00"){
+        alert("Please set a time first.");
     }
     else{
-        hours = document.getElementById("hours").value;
+        document.getElementById("time").innerHTML = document.getElementById("timeText").innerHTML;
     }
     
-    
-   if((document.getElementById("minutes").value).toString().length === 1){
-        minutes = "0" + document.getElementById("minutes").value;
-    }
-    else if((document.getElementById("minutes").value).toString().length === 0){
-        minutes = "00";
-    }
-    else{
-        minutes = document.getElementById("minutes").value;
-    }
-    
-     if((document.getElementById("seconds").value).toString().length === 1){
-        seconds = "0" + document.getElementById("seconds").value;
-    }
-    else if((document.getElementById("seconds").value).toString().length === 0){
-        seconds = "00";
-    }
-    else{
-        seconds = document.getElementById("seconds").value;
-    }
-    cdTime = hours + ":" + minutes + ":" + seconds;
-    h1.textContent = cdTime;
-    //alert(cdTime);
-    //alert(cdTime);
 }
